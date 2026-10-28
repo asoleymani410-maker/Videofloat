@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   build:
@@ -27,12 +26,11 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Check uploaded ZIP
-        run: ls -la
+      - name: Show uploaded files
+        run: ls -lah
 
-      - name: Extract project
+      - name: Extract project ZIP
         run: |
           mkdir source
           unzip -q VideoFloat-Android-Project.zip -d source
           find source -maxdepth 4 -type f | head -100
-          
