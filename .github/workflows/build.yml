@@ -1,0 +1,38 @@
+
+name: Build VideoFloat APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Check uploaded ZIP
+        run: ls -la
+
+      - name: Extract project
+        run: |
+          mkdir source
+          unzip -q VideoFloat-Android-Project.zip -d source
+          find source -maxdepth 4 -type f | head -100
+          
